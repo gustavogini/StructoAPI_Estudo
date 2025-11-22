@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/Structo.API/Structo.API.csproj" Id="8eb764c8-cddb-4bbd-b6d1-ef84da526648" />
+    <Project Path="src/Backend/Structo.Application/Structo.Application.csproj" Id="5ea5967e-4482-43c3-ad81-c366abebebd7" />
+    <Project Path="src/Backend/Structo.Domain/Structo.Domain.csproj" Id="0f21f9a0-7cf5-479a-9c5e-7a521c553e75" />
+    <Project Path="src/Backend/Structo.Infrastructure/Structo.Infrastructure.csproj" Id="cba828c2-fe4d-4ab0-976d-9a0141840a75" />
+  </Folder>
+  <Folder Name="/src/Desktop/" />
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/Structo.Communication/Structo.Communication.csproj" Id="d8b0d8b6-7c60-4020-846a-417541d4f35b" />
+    <Project Path="src/Shared/Structo.Exceptions/Structo.Exceptions.csproj" Id="1e013758-0668-457b-9485-95a3123fed68" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CommonTestUtilities/CommonTestUtilities.csproj" Id="425d6bef-3baf-4b14-8283-170dafef614d" />
+    <Project Path="tests/UseCases.Test/UseCases.Test.csproj" Id="494fd406-2708-4b1b-922a-db53a5addf43" />
+    <Project Path="tests/Validators.Test/Validators.Test.csproj" Id="4ce6c0ac-160c-479f-a738-aa4187807d92" />
+  </Folder>
+</Solution>
