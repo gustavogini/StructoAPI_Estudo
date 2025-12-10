@@ -11,17 +11,17 @@ namespace Structo.Application.UseCases.User.Register
 {
     public class RegisterUserUseCase : IRegisterUserUseCase
     {
-        private readonly IUserWriteOnlyRepository _writeOnlyRepository;
-        private readonly IUserReadOnlyRepository _readOnlyRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly PasswordEncripter _passwordEncripter;
+        private readonly IUserWriteOnlyRepository _writeOnlyRepository; // interface de repositório para operações de escrita para usuários
+        private readonly IUserReadOnlyRepository _readOnlyRepository; // interface de repositório para operações de leitura para usuários
+        private readonly IUnitOfWork _unitOfWork; // interface para gerenciar transações de banco de dados
+        private readonly IMapper _mapper; // interface do AutoMapper para mapear objetos de um tipo para outro param de DTOs e entidades
+        private readonly PasswordEncripter _passwordEncripter; // serviço para encriptar senhas de usuários no momento do registro
 
         public RegisterUserUseCase(IUserWriteOnlyRepository writeOnlyRepository,
                                    IUserReadOnlyRepository readOnlyRepository,
                                    IUnitOfWork unitOfWork,
                                    PasswordEncripter passwordEncripter,
-                                   IMapper mapper)
+                                   IMapper mapper) // injeção de dependências via construtor para os repositórios, unidade de trabalho, serviço de encriptação e mapper
         {
             _writeOnlyRepository = writeOnlyRepository;
             _readOnlyRepository = readOnlyRepository;

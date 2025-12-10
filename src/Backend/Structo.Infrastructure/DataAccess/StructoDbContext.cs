@@ -10,8 +10,8 @@ namespace Structo.Infrastructure.DataAccess
             //aqui passamos a informação de conexão com o banco de dados para a base DbContext
         }
 
-        public DbSet<User> Users { get; set; }
-        
+        public DbSet<User> Users { get; set; } //aqui estamos dizendo ao Entity Framework que temos uma tabela de usuários no banco de dados
+        // aqui vamos adicionar os DbSets das outras entidades quando criarmos elas
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

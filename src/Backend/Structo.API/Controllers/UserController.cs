@@ -6,13 +6,15 @@ using Structo.Communication.Responses;
 
 namespace Structo.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
-        public async Task<IActionResult> Register([FromServices]IRegisterUserUseCase useCase, [FromBody]RequestRegisterUserJson request) //Register a new user
+        public async Task<IActionResult> Register(
+            [FromServices] IRegisterUserUseCase useCase, 
+            [FromBody] RequestRegisterUserJson request) //Register a new user
         {
             var result = await useCase.Execute(request);
 

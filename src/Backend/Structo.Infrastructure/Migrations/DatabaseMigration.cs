@@ -9,8 +9,10 @@ namespace Structo.Infrastructure.Migrations
     {
         public static void Migrate(string connectionString, IServiceProvider serviceProvider)
         {
-            EnsureDatabaseCreated(connectionString);
-            MigrationDatabase(serviceProvider);
+            
+            EnsureDatabaseCreated(connectionString); // garantee database exists
+            MigrationDatabase(serviceProvider); // execute migrations
+
         }   
 
         private static void EnsureDatabaseCreated(string connectionString)
@@ -22,16 +24,18 @@ namespace Structo.Infrastructure.Migrations
             connectionStringBuilder.Remove("Database");
 
             using var dbConnection = new NpgsqlConnection(connectionStringBuilder.ConnectionString);
-            
+            dbConnection.Open();
 
             var parameters = new DynamicParameters();
             parameters.Add("name", databaseName);
 
-            var records  = dbConnection.Query("SELECT * FROM information_schema.schemata WHERE schema_name = @name", parameters); 
 
-            if (records.Any() == false)
+            //var records = dbConnection.Query("SELECT * FROM information_schema.schemata WHERE schema_name = @name", parameters);
+            var records  = dbConnection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = @name", parameters);
+
+            if (records == 0 ) //(records.Any() == false)
             {
-                dbConnection.Execute($"CREATE DATABASE {databaseName}"); //converter para postgresql
+                dbConnection.Execute($@"CREATE DATABASE ""{databaseName}""");  //\"{databaseName}\"
             }
         }
 

@@ -25,7 +25,7 @@ namespace Structo.Infrastructure
         {
             var connectionString = configuration.ConnectionString();
             // Configuração do DbContext
-            services.AddDbContext<StructoDbContext>(dbContextOptions =>
+            services.AddDbContextPool<StructoDbContext>(dbContextOptions =>
             {
                 dbContextOptions.UseNpgsql(connectionString); //aqui ja esta para postgresql
             });

@@ -9,6 +9,9 @@ namespace Structo.Infrastructure.Migrations.Versions
         public override void Up()
         {
             Create.Table("Users")
+                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                .WithColumn("CreatedOn").AsDateTime().NotNullable()
+                .WithColumn("Active").AsBoolean().NotNullable()
                 .WithColumn("Username").AsString(255).NotNullable()
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Password").AsString(255).NotNullable();

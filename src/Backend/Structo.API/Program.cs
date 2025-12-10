@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Structo.API.Filters;
 using Structo.API.Middleware;
@@ -20,6 +21,8 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)))
 
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true); // URLs com letras minúsculas
 
 var app = builder.Build();
 
@@ -50,3 +53,5 @@ void MigrateDatabase()
 
     DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
 }
+
+public partial class Program { }

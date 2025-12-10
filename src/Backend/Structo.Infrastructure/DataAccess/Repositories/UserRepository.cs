@@ -6,7 +6,7 @@ namespace Structo.Infrastructure.DataAccess.Repositories
 {
     public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
     {
-        private readonly StructoDbContext _dbContext;
+        private readonly StructoDbContext _dbContext; // somente o construtor tem acesso a essa variável
 
         public UserRepository(StructoDbContext dbContext)
         {
@@ -22,7 +22,7 @@ namespace Structo.Infrastructure.DataAccess.Repositories
 
         public async Task<bool> ExistActiveUserWtihEmail(string email) //coloca bool na task pq o retorno é verdadeiro ou falso
         {
-            return await _dbContext.Users.AnyAsync(user => user.Email.Equals(email) && user.Active);
+            return await _dbContext.Users.AnyAsync(user => user.Email.Equals(email) && user.Active);// verifica se existe algum usuário na tabela de usuários com o email fornecido e que esteja ativo
         }
 
 
