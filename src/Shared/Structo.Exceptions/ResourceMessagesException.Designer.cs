@@ -88,11 +88,56 @@ namespace Structo.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail ou senha inválidos.
+        /// </summary>
+        public static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha Invalida.
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The name cannot be empty.
         /// </summary>
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Token não informado.
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha diferente da atual.
+        /// </summary>
+        public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha vazia.
+        /// </summary>
+        public static string PASSWORD_EMPTY {
+            get {
+                return ResourceManager.GetString("PASSWORD_EMPTY", resourceCulture);
             }
         }
         
@@ -111,6 +156,15 @@ namespace Structo.Exceptions {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário sem permissão de acesso.
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
             }
         }
     }

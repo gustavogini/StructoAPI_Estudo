@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Structo.Domain.Security.Cryptography;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Structo.Application.Services.Cryptography
+namespace Structo.Infrastructure.Security.Cryptography
 {
-    public class PasswordEncripter
+    public class Sha512Encripter : IPasswordEncripter
     {
         private readonly string _additionalKey;
-        public PasswordEncripter(string additionalKey)
+        public Sha512Encripter(string additionalKey)
         {
             _additionalKey = additionalKey;
         }
@@ -32,6 +33,5 @@ namespace Structo.Application.Services.Cryptography
             }
             return stringBuilder.ToString();
         }
-    
     }
 }

@@ -1,12 +1,13 @@
-﻿using Structo.Application.Services.Cryptography;
+﻿using Structo.Domain.Security.Cryptography;
+using Structo.Infrastructure.Security.Cryptography;
 
 namespace CommonTestUtilities.Cryptography
 {
     public class PassordEncripterBuilder
     {
-        public static PasswordEncripter Build()
+        public static IPasswordEncripter Build()
         {
-            return new PasswordEncripter("abc1234");
+            return new Sha512Encripter("abc1234");
         }
     }
 }

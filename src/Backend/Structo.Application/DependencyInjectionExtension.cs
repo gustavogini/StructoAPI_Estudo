@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Structo.Application.Services.Automapper;
-using Structo.Application.Services.Cryptography;
+using Structo.Application.UseCases.Login.DoLogin;
+using Structo.Application.UseCases.User.Profile;
 using Structo.Application.UseCases.User.Register;
+using Structo.Application.UseCases.User.Update;
 
 
 namespace Structo.Application
@@ -13,7 +14,6 @@ namespace Structo.Application
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             // Adicione aqui a configuração de injeção de dependências para a camada de aplicação
-            AddPasswordEncrypter(services, configuration);
             AddAutoMapper(services);
             AddUseCases(services);
         }
@@ -32,19 +32,14 @@ namespace Structo.Application
         {
             // Configuração dos casos de uso
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+            services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 
 
         }
 
 
-        private static void AddPasswordEncrypter(IServiceCollection services, IConfiguration configuration)
-        {
-            // Configuração dos casos de uso
-            var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
-
-            services.AddScoped(options => new PasswordEncripter(additionalKey!));
-
-
-        }
+        
     }
 }

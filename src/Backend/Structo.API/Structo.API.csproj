@@ -8,9 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.0.1" />
+    <Content Remove="appsettings - Cópia.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>

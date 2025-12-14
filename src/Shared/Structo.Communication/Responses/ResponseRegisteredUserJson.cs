@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Structo.Communication.Responses
+﻿namespace Structo.Communication.Responses
 {
     public class ResponseRegisteredUserJson
     {
         public string Name { get; set; } = string.Empty;
+
+        public ResponseTokensJson Tokens { get; set; } = default!;
     }
 }

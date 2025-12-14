@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Backend\Structo.Application\Structo.Application.csproj" />
+    <ProjectReference Include="..\..\src\Backend\Structo.Infrastructure\Structo.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Shared\Structo.Communication\Structo.Communication.csproj" />
   </ItemGroup>
 

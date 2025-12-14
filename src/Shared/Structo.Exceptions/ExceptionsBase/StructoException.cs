@@ -6,6 +6,8 @@ namespace Structo.Exceptions.ExceptionsBase
 {
     public class StructoException : SystemException
     {
-
+        public StructoException(string? message) : base(message)
+        {
+        }
     }
 }

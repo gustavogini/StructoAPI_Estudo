@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Structo.Communication.Responses;
 using Structo.Exceptions;
 using Structo.Exceptions.ExceptionsBase;
-using System;
 using System.Net;
-using System.Resources;
 
 namespace Structo.API.Filters
 {
@@ -23,18 +21,26 @@ namespace Structo.API.Filters
             }
         }
 
-        private void HandleProjectException(ExceptionContext context)
+        private static void HandleProjectException(ExceptionContext context)
         {
-            var exception = context.Exception as ErrorOnValidationException;
-
-            if (context.Exception is ErrorOnValidationException)
+            if (context.Exception is InvalidLoginException)
             {
+                var exception = context.Exception as ErrorOnValidationException;
+
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(context.Exception.Message));
+            }
+
+            else if (context.Exception is ErrorOnValidationException)
+            {
+                var exception = context.Exception as ErrorOnValidationException;
+
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Result = new BadRequestObjectResult(new ResponseErrorJson(exception.ErrorMessages));
             }
         }
 
-        private void ThrowUnknowException(ExceptionContext context)
+        private static void ThrowUnknowException(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Result = new ObjectResult(new ResponseErrorJson(ResourceMessagesException.UNKNOWN_ERROR));

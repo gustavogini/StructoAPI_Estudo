@@ -1,4 +1,5 @@
 ﻿using Moq;
+using Structo.Domain.Entities;
 using Structo.Domain.Repositories.User;
 
 namespace CommonTestUtilities.Repositories
@@ -15,6 +16,11 @@ namespace CommonTestUtilities.Repositories
         public void ExistActiveUserWtihEmail(string email)
         {
             _repository.Setup(repository => repository.ExistActiveUserWtihEmail(email)).ReturnsAsync(true);
+        }
+
+        public void GetByEmailAndPassword(User user)
+        {
+            _repository.Setup(repository => repository.GetByEmailAndPassword(user.Email, user.Password)).ReturnsAsync(user);
         }
 
 
