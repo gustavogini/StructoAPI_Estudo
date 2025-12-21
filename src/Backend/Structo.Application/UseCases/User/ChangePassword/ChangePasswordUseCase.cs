@@ -6,9 +6,6 @@ using Structo.Domain.Security.Cryptography;
 using Structo.Domain.Services.LoggedUser;
 using Structo.Exceptions;
 using Structo.Exceptions.ExceptionsBase;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Structo.Application.UseCases.User.ChangePassword
 {

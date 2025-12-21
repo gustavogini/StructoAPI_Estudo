@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 using Structo.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Structo.Application.SharedValidators
 {

@@ -31,10 +31,9 @@ namespace Structo.API.Filters
                 var userIdentifier = _accessTokenValidator.ValidateAndGetUserIdentifier(token);
 
                 var exist = await _repository.ExistActiveUserWithIdentifier(userIdentifier);
-
                 if (exist.IsFalse())
                 {
-                    throw new StructoException(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
+                    throw new UnauthorizedException(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
                 }
             }
             catch (SecurityTokenExpiredException)
@@ -44,25 +43,23 @@ namespace Structo.API.Filters
                     TokenIsExpired = true,
                 });
             }
-            catch (StructoException ex)
+            catch (StructoException structoException)
             {
-                context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ex.Message));
+                context.HttpContext.Response.StatusCode = (int)structoException.GetStatusCode();
+                context.Result = new ObjectResult(new ResponseErrorJson(structoException.GetErrorMessages()));
             }
             catch
             {
                 context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ResourceMessagesException.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
             }
-
         }
-
 
         private static string TokenOnRequest(AuthorizationFilterContext context)
         {
             var authentication = context.HttpContext.Request.Headers.Authorization.ToString();
-
-            if (string.IsNullOrEmpty(authentication))
+            if (string.IsNullOrWhiteSpace(authentication))
             {
-                throw new StructoException(ResourceMessagesException.NO_TOKEN);
+                throw new UnauthorizedException(ResourceMessagesException.NO_TOKEN);
             }
 
             return authentication["Bearer ".Length..].Trim();

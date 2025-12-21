@@ -6,24 +6,23 @@ using System.Globalization;
 using System.Net;
 using System.Text.Json;
 using WebApi.Test.InlineData;
+using Xunit;
 
 namespace WebApi.Test.Login.DoLogin
 {
     public class DoLoginTest : StructoClassFixture
     {
-        private readonly string method = "login";
+        private readonly string METHOD = "login";
 
         private readonly string _email;
         private readonly string _password;
         private readonly string _name;
 
-
-        public DoLoginTest(CustomWebApplicationFactory factory) : base (factory)
+        public DoLoginTest(CustomWebApplicationFactory factory) : base(factory)
         {
             _email = factory.GetEmail();
             _password = factory.GetPassword();
             _name = factory.GetName();
-
         }
 
         [Fact]
@@ -35,7 +34,8 @@ namespace WebApi.Test.Login.DoLogin
                 Password = _password
             };
 
-            var response = await DoPost(method, request);
+            //var response = await DoPost(METHOD, request);
+            var response = await DoPost(method: METHOD, request: request);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -44,18 +44,16 @@ namespace WebApi.Test.Login.DoLogin
             var responseData = await JsonDocument.ParseAsync(responseBody);
 
             responseData.RootElement.GetProperty("name").GetString().Should().NotBeNullOrWhiteSpace().And.Be(_name);
-            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().Should().NotBeNullOrEmpty();
-
-
+            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().Should().NotBeNullOrWhiteSpace();
         }
 
         [Theory]
         [ClassData(typeof(CultureInlineDataTest))]
-        public async Task Error_Login_Invalid(string culture) //arrumar esse teste depois, tem que colocar as demais linguas e conteudos no ResouceMessageException
+        public async Task Error_Login_Invalid(string culture)
         {
             var request = RequestLoginJsonBuilder.Build();
-           
-            var response = await DoPost(method, request);
+
+            var response = await DoPost(method: METHOD, request: request, culture: culture);
 
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
@@ -67,14 +65,7 @@ namespace WebApi.Test.Login.DoLogin
 
             var expectedMessage = ResourceMessagesException.ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", new CultureInfo(culture));
 
-            errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(""));
+            errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(expectedMessage));
         }
-
-
-
-
-
-
-
     }
 }

@@ -55,7 +55,7 @@ namespace WebApi.Test.User.Register
 
             var expectedMessage = ResourceMessagesException.ResourceManager.GetString("NAME_EMPTY", new CultureInfo(culture));
 
-            errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(""));
+            errors.Should().ContainSingle().And.Contain(error => error.GetString()!.Equals(expectedMessage));
         }
         
     }

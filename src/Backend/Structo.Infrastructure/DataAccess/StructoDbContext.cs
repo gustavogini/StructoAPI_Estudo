@@ -12,6 +12,7 @@ namespace Structo.Infrastructure.DataAccess
 
         public DbSet<User> Users { get; set; } //aqui estamos dizendo ao Entity Framework que temos uma tabela de usuários no banco de dados
         // aqui vamos adicionar os DbSets das outras entidades quando criarmos elas
+        public DbSet<Company> Companies { get; set; } //aqui estamos dizendo ao Entity Framework que temos uma tabela de companhias no banco de dados
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

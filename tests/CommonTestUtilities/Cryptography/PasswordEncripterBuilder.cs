@@ -3,7 +3,7 @@ using Structo.Infrastructure.Security.Cryptography;
 
 namespace CommonTestUtilities.Cryptography
 {
-    public class PassordEncripterBuilder
+    public class PasswordEncripterBuilder
     {
         public static IPasswordEncripter Build()
         {

@@ -17,6 +17,7 @@ namespace Structo.Application.UseCases.User.Profile
         public async Task<ResponseUserProfileJson> Execute()
         {
             var user = await _loogedUser.User();
+
             return _mapper.Map<ResponseUserProfileJson>(user);
         }
     }

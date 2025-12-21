@@ -56,6 +56,11 @@ namespace WebApi.Test
             return _user.Username;
         }
 
+        public Guid GetUserIdentifier()
+        {
+            return _user.UserIdentifier; 
+        }
+
 
         private void StartDatabase(StructoDbContext dbContext) // This method can be used to initialize or seed the database if needed
         {

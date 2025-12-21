@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Net;
 
 namespace Structo.Exceptions.ExceptionsBase
 {
-    public class StructoException : SystemException
+    public abstract class StructoException : SystemException
     {
         public StructoException(string? message) : base(message)
         {
         }
+
+        public abstract IList<string> GetErrorMessages();
+        public abstract HttpStatusCode GetStatusCode();
     }
 }

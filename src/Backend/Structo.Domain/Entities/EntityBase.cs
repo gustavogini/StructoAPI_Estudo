@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Structo.Domain.Entities
+﻿namespace Structo.Domain.Entities
 {
     public class EntityBase
     {

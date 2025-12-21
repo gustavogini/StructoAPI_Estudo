@@ -13,7 +13,9 @@ namespace Structo.API.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
 
 
-        public async Task<IActionResult> Login([FromServices] IDoLoginUseCase useCase, [FromBody] RequestLoginJson request)
+        public async Task<IActionResult> Login(
+            [FromServices] IDoLoginUseCase useCase, 
+            [FromBody] RequestLoginJson request)
         {
             var response = await useCase.Execute(request);
 

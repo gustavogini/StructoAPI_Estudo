@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi;
 using Structo.API.Converters;
 using Structo.API.Filters;
@@ -11,8 +9,8 @@ using Structo.Domain.Security.Tokens;
 using Structo.Infrastructure;
 using Structo.Infrastructure.Extensions;
 using Structo.Infrastructure.Migrations;
-using System.Reflection;
 
+const string AUTHENTICATION_TYPE = "Bearer";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,11 +20,14 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 
-const string schemeId = "bearer";
+//const string schemeId = "bearer";
 builder.Services.AddSwaggerGen(options =>
 {
+    //options.OperationFilter<IdsFilter>();
+
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Structo API", Version = "v1" });
-    options.AddSecurityDefinition(schemeId, new OpenApiSecurityScheme
+
+    options.AddSecurityDefinition(AUTHENTICATION_TYPE, new OpenApiSecurityScheme
     {
         Description = @"JWT Authorization header using the Bearer scheme. 
                       Enter 'Bearer' [space] and then your token in the text input below.
@@ -34,12 +35,12 @@ builder.Services.AddSwaggerGen(options =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
-        Scheme = "bearer"
+        Scheme = AUTHENTICATION_TYPE
     });
 
     options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
     {
-        [new OpenApiSecuritySchemeReference("bearer", document)] = []
+        [new OpenApiSecuritySchemeReference(AUTHENTICATION_TYPE, document)] = []
     });
 });
 
@@ -53,6 +54,14 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true); // URLs co
 
 builder.Services.AddHttpContextAccessor();
 
+/*if (builder.Configuration.IsUnitTestEnviroment().IsFalse())
+{
+    builder.Services.AddHostedService<DeleteUserService>();
+
+    AddGoogleAuthentication();
+}
+
+builder.Services.AddHealthChecks().AddDbContextCheck<StructoDbContext>();*/
 
 var app = builder.Build();
 

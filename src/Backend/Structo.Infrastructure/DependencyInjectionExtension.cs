@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Structo.Domain.Repositories;
+using Structo.Domain.Repositories.Company;
 using Structo.Domain.Repositories.User;
 using Structo.Domain.Security.Cryptography;
 using Structo.Domain.Security.Tokens;
@@ -54,6 +55,10 @@ namespace Structo.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+            services.AddScoped<ICompanyWriteOnlyRepository, CompanyRepository>();
+            services.AddScoped<ICompanyReadOnlyRepository, CompanyRepository>();
+            services.AddScoped<ICompanyUpdateOnlyRepository, CompanyRepository>();
         }
 
         private static void AddFluentMigrator_Postgres(IServiceCollection services, IConfiguration configuration)

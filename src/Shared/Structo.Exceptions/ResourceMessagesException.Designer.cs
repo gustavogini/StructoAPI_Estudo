@@ -61,6 +61,60 @@ namespace Structo.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O endereço não pode ser vazio..
+        /// </summary>
+        public static string ADDRESS_EMPTY {
+            get {
+                return ResourceManager.GetString("ADDRESS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A cidade não pode ser vazia.
+        /// </summary>
+        public static string CITY_EMPTY {
+            get {
+                return ResourceManager.GetString("CITY_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O CNPJ não pode ser vazio..
+        /// </summary>
+        public static string CNPJ_EMPTY {
+            get {
+                return ResourceManager.GetString("CNPJ_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O nome da empresa não pode ser vazio.
+        /// </summary>
+        public static string COMPANY_NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("COMPANY_NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Empresa não encontrada..
+        /// </summary>
+        public static string COMPANY_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("COMPANY_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O bairro não pode ser vazio.
+        /// </summary>
+        public static string DISTRICT_EMPTY {
+            get {
+                return ResourceManager.GetString("DISTRICT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail já registrado.
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
@@ -151,6 +205,24 @@ namespace Structo.Exceptions {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O telefone não pode ser vazio.
+        /// </summary>
+        public static string PHONE_EMPTY {
+            get {
+                return ResourceManager.GetString("PHONE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A UF não pode ser vazia.
+        /// </summary>
+        public static string STATE_EMPTY {
+            get {
+                return ResourceManager.GetString("STATE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro desconhecido.
         /// </summary>
         public static string UNKNOWN_ERROR {
@@ -165,6 +237,15 @@ namespace Structo.Exceptions {
         public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
             get {
                 return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O cep não pode ser vazio.
+        /// </summary>
+        public static string ZIPCODE_EMPTY {
+            get {
+                return ResourceManager.GetString("ZIPCODE_EMPTY", resourceCulture);
             }
         }
     }

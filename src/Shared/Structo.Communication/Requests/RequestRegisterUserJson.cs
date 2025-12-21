@@ -10,7 +10,7 @@ namespace Structo.Communication.Requests
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
-        public class Build : RequestRegisterUserJson
+        public class Build : RequestRegisterUserJson //builder para facilitar a criação do objeto na hora de usar no código de teste
         {
         }
     }

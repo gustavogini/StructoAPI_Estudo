@@ -153,4 +153,7 @@
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Senha invalida</value>
   </data>
+  <data name="COMPANY_NOT_FOUND" xml:space="preserve">
+    <value>Empresa não encontrada.</value>
+  </data>
 </root>

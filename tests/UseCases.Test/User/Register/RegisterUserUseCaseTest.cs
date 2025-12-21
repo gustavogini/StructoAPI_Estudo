@@ -5,6 +5,7 @@ using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using Structo.Application.UseCases.User.Register;
+using Structo.Domain.Extensions;
 using Structo.Exceptions;
 using Structo.Exceptions.ExceptionsBase;
 
@@ -31,12 +32,13 @@ namespace UseCases.Test.User.Register
         public async Task Error_Email_Already_Registered()
         {
             var request = RequestRegisterUserJsonBuilder.Build();
-            var useCase = CreateUseCase();
 
-            Func<Task> act = async () =>  await useCase.Execute(request); // essa é uma variavel Func com nome act. ela chama a funcao usecase e armazena a funcao na variavel act
+            var useCase = CreateUseCase(request.Email);
 
-            (await act.Should().ThrowAsync<ErrorOnValidationException>()) // aqui o act deve lançar a exceção. neste momento que ele executa a funcao armazenada na variavel act
-                .Where(e => e.ErrorMessages.Count == 1 && e.ErrorMessages.Contains(ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
+            Func<Task> act = async () => await useCase.Execute(request);
+
+            (await act.Should().ThrowAsync<ErrorOnValidationException>())
+                .Where(e => e.GetErrorMessages().Count == 1 && e.GetErrorMessages().Contains(ResourceMessagesException.EMAIL_ALREADY_REGISTERED));
         }
 
         [Fact]
@@ -50,24 +52,24 @@ namespace UseCases.Test.User.Register
             Func<Task> act = async () =>  await useCase.Execute(request); // essa é uma variavel Func com nome act. ela chama a funcao usecase e armazena a funcao na variavel act
 
             (await act.Should().ThrowAsync<ErrorOnValidationException>()) // aqui o act deve lançar a exceção. neste momento que ele executa a funcao armazenada na variavel act
-                .Where(e => e.ErrorMessages.Count == 1 && e.ErrorMessages.Contains(ResourceMessagesException.NAME_EMPTY));
+                .Where(e => e.GetErrorMessages().Count == 1 && e.GetErrorMessages().Contains(ResourceMessagesException.NAME_EMPTY));
         }
 
-        private static RegisterUserUseCase CreateUseCase(string? email = null)//dessa forma o email pode ser opcional e nao afeta o useCase que nao passa email
+        private static RegisterUserUseCase CreateUseCase(string? email = null)
         {
             var mapper = MapperBuilder.Build();
-            var passwordEncripter = PassordEncripterBuilder.Build();
-            var writerRepository = UserWriteOnlyRepositoryBuilder.Build();
+            var passwordEncripter = PasswordEncripterBuilder.Build();
+            var writeRepository = UserWriteOnlyRepositoryBuilder.Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
-            var readRepositoryBuilder = new UserReadOnlyRepositoryBuilder(); //nesse caso precisa ser instanciado(new) pq não é estático
+            var readRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
             var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+            //var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
+            //var tokenRepository = new TokenRepositoryBuilder().Build();
 
-            if (string.IsNullOrEmpty(email) == false)
-            {
+            if (email.NotEmpty())
                 readRepositoryBuilder.ExistActiveUserWtihEmail(email);
-            }
 
-            return new RegisterUserUseCase(writerRepository, readRepositoryBuilder.Build(), unitOfWork, passwordEncripter, accessTokenGenerator, mapper);
+            return new RegisterUserUseCase(writeRepository, readRepositoryBuilder.Build(), unitOfWork, passwordEncripter, accessTokenGenerator, mapper/*, tokenRepository, refreshTokenGenerator*/);
         }
     }
 }

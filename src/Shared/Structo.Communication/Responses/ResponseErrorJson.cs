@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Structo.Communication.Responses
 {
-    public class ResponseErrorJson
+    public class ResponseErrorJson //essa classe detalha a estrutura de dados para respostas de erro retornadas pela API
     {
         
         public bool TokenIsExpired { get; set; }

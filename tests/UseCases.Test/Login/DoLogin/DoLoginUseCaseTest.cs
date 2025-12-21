@@ -45,7 +45,7 @@ namespace UseCases.Test.Login.DoLogin
 
         private static DoLoginUseCase CreateUseCase(Structo.Domain.Entities.User? user = null)
         {
-            var passwordEncripter = PassordEncripterBuilder.Build(); // aqui esta criando a instancia de PasswordEncripter
+            var passwordEncripter = PasswordEncripterBuilder.Build(); // aqui esta criando a instancia de PasswordEncripter
             var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
             var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
 
